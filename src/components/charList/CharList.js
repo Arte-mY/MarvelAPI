@@ -55,28 +55,28 @@ const CharList = (props) =>{
         const items = arr.map((item, i) => {
             let imgStyle = {'objectFit' : 'cover'};
             if (item.thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg') {  
-            imgStyle = {'objectFit' : 'unset'}
+            imgStyle = {'objectFit' : 'unset'};
             }
 
         return (
-            <li
-                className="char__item"
-                tabIndex={0}
-                ref={el => itemRefs.current[i] = el}
-                key={item.id}
-                onClick={() => {
+            <li 
+            className="char__item"
+            tabIndex={0}
+            ref={el => itemRefs.current[i] = el}
+            key={item.id}
+            onClick={() => {
+                props.onCharSelected(item.id);
+                focusOnItem(i);
+            }}
+            onKeyPress={(e) => {
+                if (e.key === ' ' || e.key === "Enter") {
                     props.onCharSelected(item.id);
                     focusOnItem(i);
-                }}
-                onKeyPress={(e) =>{
-                    if (e.key === ' ' || e.key === "Enter") {
-                        props.onCharSelected(item.id);
-                        focusOnItem(i);
-                    }
-                }}>
-                    <img src={item.thumbnail} alt={item.name} style={imgStyle}/>
-                    <div className="char__name">{item.name}</div>
-            </li>
+                }
+            }}>
+                <img src={item.thumbnail} alt={item.name} style={imgStyle}/>
+                <div className="char__name">{item.name}</div>
+        </li>
         )
     });
 
